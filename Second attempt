@@ -1,0 +1,25 @@
+/*Экзамен:
+Придумать сценарий в реальном мире, где используются и изменяются переменные.
+реализовать этот сценарий. После каждого изменения переменно печатать ее значение с помощью println()*/
+
+
+fun main() {
+
+    println("Добро пожаловать! \nДавайте накопим денег на покупку чего-то ценного. \nСколько вам нужно накопить?")
+    val readmax = readln()
+    var numbermax = readmax.toLongOrNull() ?: return
+    println("Сколько вы готовы отложить в начале?")
+    var read = readln()
+    var number = read.toLongOrNull() ?: return
+    while(numbermax > number){
+        println("Как вы хотите изменить эту сумму")
+        var readcurrent = readln()
+        var numbercurrent = readcurrent.toLongOrNull() ?: return
+        number+=numbercurrent
+        println("Вы внесли $numbercurrent и накопили $number р.")
+    }
+    println("""
+  Поздравляем!
+  Вы накопили как минимум $numbermax!
+        """)
+}
