@@ -1,0 +1,5 @@
+fun main() {
+    println("План работ на сегодня")
+     val schedule = readLine()
+      println("1. $schedule")
+}
