@@ -1,5 +1,22 @@
 fun main() {
-    println("План работ на сегодня")
-     val schedule = readLine()
-      println("1. $schedule")
+
+    println("Добро пожаловать! \nДавайте составим ваш распорядок дня на сегодня из пяти пунктов!")
+    val a = readLine()
+    println("1. $a . Что дальше?")
+    val b = readLine()
+    println("2. $b . Затем?")
+    val c = readLine()
+    println("3. $c . После этого?")
+    val d = readLine()
+    println("4. $d . И наконец?")
+    val e = readLine()
+    println("""
+    Поздравляем! Ваш распорядок дня готов!
+        1. $a
+        2. $b
+        3. $c
+        4. $d
+        5. $e
+    Хорошего дня!
+        """)
 }
