@@ -6,20 +6,17 @@
 fun main() {
 
     println("Добро пожаловать! \nДавайте накопим денег на покупку чего-то ценного. \nСколько вам нужно накопить?")
-    val readmax = readln()
-    var numbermax = readmax.toLongOrNull() ?: return
+    val goal = readln().toLongOrNull() ?: return
     println("Сколько вы готовы отложить в начале?")
-    var read = readln()
-    var number = read.toLongOrNull() ?: return
-    while(numbermax > number){
+    var deposit = readln().toLongOrNull() ?: return
+    while(goal > deposit){
         println("Как вы хотите изменить эту сумму")
-        var readcurrent = readln()
-        var numbercurrent = readcurrent.toLongOrNull() ?: return
-        number+=numbercurrent
-        println("Вы внесли $numbercurrent и накопили $number р.")
+        val depositAdd = readln().toLongOrNull() ?: return
+        deposit+=depositAdd
+        println("Вы внесли $depositAdd и накопили $deposit р.")
     }
     println("""
   Поздравляем!
-  Вы накопили как минимум $numbermax!
+  Вы накопили как минимум $goal!
         """)
 }
