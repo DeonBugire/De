@@ -1,0 +1,19 @@
+fun main() {
+    val nameOwner = "Саша"
+    val nameLimitedAccess = "Женя"
+    var balance = 50
+    var credit = 0
+    println("Добро пожаловать! Введите ваше имя!")
+    val nameLogin = readLine()
+
+   balance -= 100
+    if (balance >= 0) {
+
+        println("$nameOwner! Вы совершили первую покупку!")
+    }
+    else {
+        credit += 100
+        balance += 100
+    println("$nameOwner! Вам не хватает денег на покупку! Вам зачислено 100 р. кредита. Ваш общий кредит $credit р.")
+    }
+}
