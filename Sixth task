@@ -1,0 +1,24 @@
+//Как мы знаем, в январе, марте, мае, июле, августе, октябре и декабре всегда по 31 дню.
+//В апреле, июне, сентябре и ноябре всегда по 30 дней.
+// В феврале 28 в обычный год и 29 - в високосные (високосные - это те года, чей номер кратен 4м).
+//Посчитать, сколько дней в 57 годах, начиная с 2001ого года.
+
+fun main() {
+    var numberOfDays = 0
+    var numberOfYear = 2001
+    while (numberOfYear <= 2057) {
+        when (numberOfYear) {
+            2004, 2008, 2012, 2016, 2020, 2024, 2028, 2032, 2036, 2040, 2044, 2048, 2052, 2056 -> {
+                numberOfDays = numberOfDays + 366
+                numberOfYear = numberOfYear + 1
+            }
+
+            else -> {
+                numberOfDays = numberOfDays + 365
+                numberOfYear = numberOfYear + 1
+            }
+        }
+
+    }
+    println("Итого $numberOfDays дней")
+}
