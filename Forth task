@@ -5,31 +5,28 @@
 Если ни мышей ни лис не осталось - вывести сообщение "Лес опустел".
 В начале и конце каждого дня выводить, сколько сейчас лис и мышей. Всего сделать 4 дня.*/
 fun main() {
-    var foxes = 8
-    var mice = 10
-    var day = 1
-    for (day in 1..4) {
-        when ((foxes <= 0) and (mice <= 0)) {
+    var numberOfFoxes = 3
+    var numberOfMice = 2
+    for (n in 1..4) {
+        println("Утро дня $n. В лесу $numberOfFoxes лис и $numberOfMice мышей")
+        if ((numberOfFoxes <= 0) and (numberOfMice <= 0)) continue;
+        when ((numberOfFoxes <= numberOfMice) and (numberOfMice > 0)) {
             true -> {
-                println("Лес опустел")
+                numberOfMice -= numberOfFoxes
+                numberOfFoxes += 1
+                numberOfMice = numberOfMice * 2
+                println("Вечер дня $n. В лесу $numberOfFoxes лис и $numberOfMice мышей")
             }
-            false -> {
-                println("Утро дня $day. В лесу $foxes лис и $mice мышей")
-                when (foxes <= mice) {
-                    true -> {
-                        mice -= foxes
-                        foxes += 1
-                        mice = mice * 2
-                        println("Вечер дня $day. В лесу $foxes лис и $mice мышей")
-                    }
 
-                    false -> {
-                        foxes = mice
-                        mice = 0
-                        println("Вечер дня $day. В лесу $foxes лис и $mice мышей")
-                    }
-                }
+            false -> {
+                numberOfFoxes = numberOfMice
+                numberOfMice = 0
+                println("Вечер дня $n. В лесу $numberOfFoxes лис и $numberOfMice мышей")
             }
+        }
+        if ((numberOfFoxes <= 0) and (numberOfMice <= 0)) {
+            println("Лес опустел")
+            break;
         }
     }
 }
