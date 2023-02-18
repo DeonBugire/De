@@ -7,8 +7,10 @@ fun main() {
     var numberOfDays = 0
     var numberOfYear = 2001
     while (numberOfYear <= 2057) {
-        when (numberOfYear) {
-            2004, 2008, 2012, 2016, 2020, 2024, 2028, 2032, 2036, 2040, 2044, 2048, 2052, 2056 -> {
+       var typeOfYear = numberOfYear % 4
+
+        when (typeOfYear) {
+            0 -> {
                 numberOfDays += 366
                 numberOfYear += 1
             }
