@@ -1,0 +1,11 @@
+// Создать список из 4х животных (одно из них кот).
+// Добавить к ним в конец списка корову. Добавь к ним в начало носорога. Удалить из списка кота.
+// После этого вывести на печать число зверей в списке всего и число зверей начинаются на букву "к".
+fun main() {
+    val listOfAnimals = mutableListOf("Олень", "Кот", "Кабан", "Кенгуру")
+    listOfAnimals.add("Корова")
+    listOfAnimals.add(0, "Носорог")
+    listOfAnimals.remove("Кот")
+    println(listOfAnimals.size)
+    println(listOfAnimals.filter { it[0] == 'К' }.size)
+}
