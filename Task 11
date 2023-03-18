@@ -1,0 +1,49 @@
+// 1. Создать класс "Ребенок", у каждого ребенка есть имя и возраст,
+// а еще должен быть метод "день рождения", после которого возраст увеличивается.
+// 2. Создать класс "Школьный автобус".
+// У автобуса есть вместимость (сколько детей он может перевозить)
+// и методы - посадить ребенка в автобус (если не влазит - ну не знаю, напечатать сообщение)
+// и высадить всех детей заданного возраста - вернуть список детей, у кого возраст равен такому-то.
+// 3. Написать демо-приложение, которое играется с этими классами
+// сажает/высаживает из автобуса, отмечает день рождения и т.д.
+
+fun main() {
+    val bob: Kid = Kid("Bob", 10)
+    val tom: Kid = Kid("Tom", 3)
+    val maria: Kid = Kid("Maria", 3)
+    var kids = mutableSetOf<Kid>(tom, maria)
+    var schoolBus: SchoolBus = SchoolBus(3, kids)
+    println(kids.size)
+    println(bob.name)
+    bob.birthday()
+    println(bob.age)
+    schoolBus.putOnTheBus(bob)
+    schoolBus.getOutTheBus(kids)
+    println(kids.size)
+}
+
+class Kid(val name: String, var age: Int) {
+    fun birthday(): Unit {
+        age += 1
+        println("Happy Birthday, $name. Now you are $age years old")
+    }
+}
+
+class SchoolBus(val capacity: Int, var kids: MutableSet<Kid>) {
+    fun putOnTheBus(bob : Kid): MutableSet<Kid>{
+        if (capacity > kids.size) {
+            kids.add(bob)
+            return kids
+        } else {
+            println("Sorry, the bus is full")
+            return kids
+        }
+    }
+
+    fun getOutTheBus(kids: MutableSet<Kid>): MutableSet<Kid> {
+        println("Which age do we drop off the bus?")
+        val ageOfDrop: Int? = readln().toIntOrNull()
+        kids.removeAll { it.age != ageOfDrop }
+        return kids
+    }
+}
