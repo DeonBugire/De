@@ -11,15 +11,15 @@ fun main() {
     val bob: Kid = Kid("Bob", 10)
     val tom: Kid = Kid("Tom", 3)
     val maria: Kid = Kid("Maria", 3)
-    var kids = mutableSetOf<Kid>(tom, maria)
-    var schoolBus: SchoolBus = SchoolBus(3, kids)
-    println(kids.size)
-    println(bob.name)
+    val schoolBus: SchoolBus = SchoolBus(3)
+    val allKids = listOf(bob, tom, maria)
     bob.birthday()
-    println(bob.age)
-    schoolBus.putOnTheBus(bob)
-    schoolBus.getOutTheBus(kids)
-    println(kids.size)
+    val kidName: String = readln()
+    println(kidName)
+    schoolBus.putOnTheBus(getKidByName(kidName, allKids))
+    println("Which age do we drop off the bus?")
+    val ageOfDrop: Int = readln().toInt()
+    schoolBus.getOutTheBus(ageOfDrop)
 }
 
 class Kid(val name: String, var age: Int) {
@@ -29,21 +29,28 @@ class Kid(val name: String, var age: Int) {
     }
 }
 
-class SchoolBus(val capacity: Int, var kids: MutableSet<Kid>) {
-    fun putOnTheBus(bob : Kid): MutableSet<Kid>{
+class SchoolBus(val capacity: Int) {
+    val kids: MutableSet<Kid> = mutableSetOf()
+    fun putOnTheBus(kid: Kid?): Unit {
         if (capacity > kids.size) {
-            kids.add(bob)
-            return kids
-        } else {
+            if (kid != null) {
+                kids.add(kid)
+                println(kids.size)
+            } else
+                println("Sorry, this kid doesn't exist")
+        } else
             println("Sorry, the bus is full")
-            return kids
-        }
     }
 
-    fun getOutTheBus(kids: MutableSet<Kid>): MutableSet<Kid> {
-        println("Which age do we drop off the bus?")
-        val ageOfDrop: Int? = readln().toIntOrNull()
-        kids.removeAll { it.age != ageOfDrop }
-        return kids
+    fun getOutTheBus(ageOfDrop: Int): Set<Kid> {
+        val kidToDeparture = kids.filter { it.age == ageOfDrop }.toSet()
+        kids.removeAll(kidToDeparture)
+        println(kids.size)
+        return kidToDeparture
     }
+}
+
+fun getKidByName(name: String, listOfKids: List<Kid>): Kid? {
+    val kid = listOfKids.find { it.name == name }
+    return kid
 }
