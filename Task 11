@@ -1,11 +1,7 @@
-// 1. Создать класс "Ребенок", у каждого ребенка есть имя и возраст,
-// а еще должен быть метод "день рождения", после которого возраст увеличивается.
-// 2. Создать класс "Школьный автобус".
-// У автобуса есть вместимость (сколько детей он может перевозить)
-// и методы - посадить ребенка в автобус (если не влазит - ну не знаю, напечатать сообщение)
-// и высадить всех детей заданного возраста - вернуть список детей, у кого возраст равен такому-то.
+// 1.  Создать класс "билет". у которого должны быть параметры номер, цена, опционально - продолжительность
+// 2. Создать класс "тариф"
+// У тарифа есть название, цена, опционально - продолжительность
 // 3. Написать демо-приложение, которое играется с этими классами
-// сажает/высаживает из автобуса, отмечает день рождения и т.д.
 
 fun main() {
     val bob: Kid = Kid("Bob", 10)
@@ -15,8 +11,11 @@ fun main() {
     val allKids = listOf(bob, tom, maria)
     bob.birthday()
     val kidName: String = readln()
-    println(kidName)
-    schoolBus.putOnTheBus(getKidByName(kidName, allKids))
+    val newKid = getKidByName(kidName, allKids)
+    when (newKid == null) {
+        true -> println("There is no such kid")
+        false -> schoolBus.putOnTheBus(newKid)
+    }
     println("Which age do we drop off the bus?")
     val ageOfDrop: Int = readln().toInt()
     schoolBus.getOutTheBus(ageOfDrop)
@@ -31,14 +30,10 @@ class Kid(val name: String, var age: Int) {
 
 class SchoolBus(val capacity: Int) {
     val kids: MutableSet<Kid> = mutableSetOf()
-    fun putOnTheBus(kid: Kid?): Unit {
-        if (capacity > kids.size) {
-            if (kid != null) {
-                kids.add(kid)
-                println(kids.size)
-            } else
-                println("Sorry, this kid doesn't exist")
-        } else
+    fun putOnTheBus(kid: Kid): Unit {
+        if (capacity > kids.size)
+            kids.add(kid)
+        else
             println("Sorry, the bus is full")
     }
 
@@ -51,6 +46,5 @@ class SchoolBus(val capacity: Int) {
 }
 
 fun getKidByName(name: String, listOfKids: List<Kid>): Kid? {
-    val kid = listOfKids.find { it.name == name }
-    return kid
+    return listOfKids.find { it.name == name }
 }
