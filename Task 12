@@ -1,0 +1,68 @@
+package com.example.fn
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.ScrollState
+import androidx.compose.foundation.background
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.fn.ui.theme.FNTheme
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            val myColor: Color = Color(red = 0xF1, green = 0xAA, blue = 0x55, alpha = 0xFF)
+            Text(
+                "Привет!\n" +
+                        "О, Дион, Повелитель Теней, чтящий и читающий!\n" +
+                        "\n" +
+                        "...............",
+                fontSize = 40.sp,
+                modifier = Modifier.background(myColor).padding(30.dp)
+                    .fillMaxWidth().height(200.dp)
+                    .horizontalScroll(
+                        ScrollState(0)
+            ))
+    }
+}
+}
+@Composable
+fun Greeting(name: String, modifier: Modifier = Modifier) {
+    Text(
+        text = "Hello $name!",
+        modifier = modifier
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    FNTheme {
+        val myColor: Color = Color(red = 0xF1, green = 0xAA, blue = 0x55, alpha = 0xFF)
+        Text(
+            "What is Lorem Ipsum?\n" +
+                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n" +
+                    "\n" +
+                    "...............",
+            fontSize = 40.sp,
+            modifier = Modifier.background(myColor).padding(30.dp)
+                .fillMaxWidth().height(200.dp)
+        )
+    }
+}
