@@ -8,12 +8,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -34,20 +36,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 
-
-
-            val myColor: Color = Color(red = 0xF1, green = 0xAA, blue = 0x55, alpha = 0xFF)
-            Text(
-                "Привет!\n" +
-                        "О, Дион, Повелитель Теней, чтящий и читающий!\n" +
-                        "\n" +
-                        "...............",
-                fontSize = 40.sp,
-                modifier = Modifier.background(myColor).padding(30.dp)
-                    .fillMaxWidth().height(200.dp)
-                    .horizontalScroll(
-                        ScrollState(0)
-            ))
+            Column {
+                Greeting ()
+                Greeting ()
+            }
             val count = remember{mutableStateOf(0)}
             Box (contentAlignment = Alignment.BottomCenter ,
                 modifier = Modifier.fillMaxSize())
@@ -62,25 +54,18 @@ class MainActivity : ComponentActivity() {
         }
 }
 }
+
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun Greeting(modifier: Modifier = Modifier) {
+    val myColor: Color = Color(red = 0xF1, green = 0xAA, blue = 0x55, alpha = 0xFF)
     Text(
-        text = "Hello $name!",
-        modifier = modifier
+        "Привет!\n" +
+                "О, Дион, Повелитель Теней, чтящий и читающий!\n" +
+                "\n" +
+                "...............",
+        fontSize = 40.sp,
+        modifier = Modifier.background(myColor).padding(30.dp)
+            .fillMaxWidth().height(200.dp)
+            .horizontalScroll(rememberScrollState())
     )
 }
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    FNTheme {
-        val myColor: Color = Color(red = 0xF1, green = 0xAA, blue = 0x55, alpha = 0xFF)
-        Text(
-            "What is Lorem Ipsum?\n" +
-                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n" +
-                    "\n" +
-                    "...............",
-            fontSize = 40.sp,
-            modifier = Modifier.background(myColor).padding(30.dp)
-                .fillMaxWidth().height(200.dp)
-        )
