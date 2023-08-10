@@ -19,6 +19,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,12 +38,13 @@ import com.example.fn.ui.theme.FNTheme
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.*
 
-
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             val countOfClicks = remember{mutableStateOf(0)}
+            val scope = rememberCoroutineScope()
+            val snackbarHostState = remember { mutableStateOf(SnackbarHostState()) }
 
                 Column (modifier = Modifier.verticalScroll(rememberScrollState())) {
                     Greeting ()
@@ -56,9 +59,13 @@ class MainActivity : ComponentActivity() {
                         "Варунодействий: ${countOfClicks.value}",
                         fontSize = 28.sp,
                         modifier = Modifier.clickable(onClick = { countOfClicks.value += 1
+                            scope.launch {
+                                snackbarHostState.value.showSnackbar("Сегодня по выгодной цене!")
+                            }
                         })
                             .padding(30.dp)
                     )
+                    SnackbarHost(snackbarHostState.value)
                 }
         }
     }
