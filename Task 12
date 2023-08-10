@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
@@ -60,10 +61,13 @@ class MainActivity : ComponentActivity() {
                         fontSize = 28.sp,
                         modifier = Modifier.clickable(onClick = { countOfClicks.value += 1
                             scope.launch {
-                                snackbarHostState.value.showSnackbar("Сегодня по выгодной цене!")
+                                snackbarHostState.value.showSnackbar("Сегодня по выгодной цене!",
+                                    actionLabel = "X",
+                                    duration = SnackbarDuration.Indefinite)
                             }
                         })
                             .padding(30.dp)
+                            .background(Color.Cyan)
                     )
                     SnackbarHost(snackbarHostState.value)
                 }
