@@ -41,11 +41,11 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val count = remember{mutableStateOf(0)}
+            val countOfClicks = remember{mutableStateOf(0)}
 
-            if (count.value == 0)
-            {
                 Column (modifier = Modifier.verticalScroll(rememberScrollState())) {
+                    Greeting ()
+                    for (n in 1..countOfClicks.value)
                     Greeting ()
                 }
 
@@ -53,44 +53,27 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize())
                 {
                     Text(
-                        "Варунодействий: ${count.value}",
+                        "Варунодействий: ${countOfClicks.value}",
                         fontSize = 28.sp,
-                        modifier = Modifier.clickable(onClick = { count.value += 1
-                            })
+                        modifier = Modifier.clickable(onClick = { countOfClicks.value += 1
+                        })
                             .padding(30.dp)
                     )
-                }}
-            else
-            {
-                Column (modifier = Modifier.verticalScroll(rememberScrollState())) {
-                    Greeting ()
-                    Greeting ()
                 }
-
-                Box (contentAlignment = Alignment.BottomCenter ,
-                    modifier = Modifier.fillMaxSize())
-                {
-                    Text(
-                        "Варунодействий: ${count.value}",
-                        fontSize = 28.sp,
-                        modifier = Modifier.clickable(onClick = { count.value += 1 })
-                            .padding(30.dp)
-                    )
-                }}
         }
     }
 
-@Composable
-fun Greeting(modifier: Modifier = Modifier) {
-    val myColor: Color = Color(red = 0xF1, green = 0xAA, blue = 0x55, alpha = 0xFF)
-    Text(
-        "Привет!\n" +
-                "О, Дион, Повелитель Теней, чтящий и читающий!\n" +
-                "\n" +
-                "...............",
-        fontSize = 40.sp,
-        modifier = Modifier.background(myColor).padding(30.dp)
-            .fillMaxWidth().height(200.dp)
-            .horizontalScroll(rememberScrollState())
-    )
-}}
+    @Composable
+    fun Greeting(modifier: Modifier = Modifier) {
+        val myColor: Color = Color(red = 0xF1, green = 0xAA, blue = 0x55, alpha = 0xFF)
+        Text(
+            "Привет!\n" +
+                    "О, Дион, Повелитель Теней, чтящий и читающий!\n" +
+                    "\n" +
+                    "...............",
+            fontSize = 40.sp,
+            modifier = Modifier.background(myColor).padding(30.dp)
+                .fillMaxWidth().height(200.dp)
+                .horizontalScroll(rememberScrollState())
+        )
+    }}
