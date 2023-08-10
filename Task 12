@@ -24,6 +24,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -32,29 +33,34 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.fn.ui.theme.FNTheme
+import kotlinx.coroutines.launch
+import androidx.compose.runtime.*
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             val count = remember{mutableStateOf(0)}
+
             if (count.value == 0)
             {
-            Column (modifier = Modifier.verticalScroll(rememberScrollState())) {
-                Greeting ()
-            }
+                Column (modifier = Modifier.verticalScroll(rememberScrollState())) {
+                    Greeting ()
+                }
 
-            Box (contentAlignment = Alignment.BottomCenter ,
-                modifier = Modifier.fillMaxSize())
-            {
-                Text(
-                    "Варунодействий: ${count.value}",
-                    fontSize = 28.sp,
-                    modifier = Modifier.clickable(onClick = { count.value += 1 })
-                        .padding(30.dp)
-                )
-            }}
-           else
+                Box (contentAlignment = Alignment.BottomCenter ,
+                    modifier = Modifier.fillMaxSize())
+                {
+                    Text(
+                        "Варунодействий: ${count.value}",
+                        fontSize = 28.sp,
+                        modifier = Modifier.clickable(onClick = { count.value += 1
+                            })
+                            .padding(30.dp)
+                    )
+                }}
+            else
             {
                 Column (modifier = Modifier.verticalScroll(rememberScrollState())) {
                     Greeting ()
@@ -73,7 +79,6 @@ class MainActivity : ComponentActivity() {
                 }}
         }
     }
-}
 
 @Composable
 fun Greeting(modifier: Modifier = Modifier) {
@@ -88,4 +93,4 @@ fun Greeting(modifier: Modifier = Modifier) {
             .fillMaxWidth().height(200.dp)
             .horizontalScroll(rememberScrollState())
     )
-}
+}}
