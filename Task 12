@@ -1,6 +1,8 @@
 package com.example.fn
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.ScrollState
@@ -38,10 +40,15 @@ import androidx.compose.ui.unit.sp
 import com.example.fn.ui.theme.FNTheme
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.*
+import com.android.volley.Request
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 
+const val API_Key_Currency = "fca_live_xlJOAdBc3gF8c5MmDinU2EJuWYyryvYuXIp5RPcl"
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        RequestCurrencyData ()
         setContent {
             val countOfClicks = remember{mutableStateOf(0)}
             val scope = rememberCoroutineScope()
@@ -74,17 +81,20 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    @Composable
-    fun Greeting(modifier: Modifier = Modifier) {
-        val myColor: Color = Color(red = 0xF1, green = 0xAA, blue = 0x55, alpha = 0xFF)
-        Text(
-            "Привет!\n" +
-                    "О, Дион, Повелитель Теней, чтящий и читающий!\n" +
-                    "\n" +
-                    "...............",
-            fontSize = 40.sp,
-            modifier = Modifier.background(myColor).padding(30.dp)
-                .fillMaxWidth().height(200.dp)
-                .horizontalScroll(rememberScrollState())
-        )
-    }}
+
+   private fun RequestCurrencyData () {
+       val url = "https://api.freecurrencyapi.com/v1/latest?apikey=" +
+               API_Key_Currency
+       val queue = Volley.newRequestQueue(context)
+       val request = StringRequest (
+           Request.Method.GET,
+           url,
+           {
+               result -> Log.d("MyLog", "Result: $result")
+           },
+           {
+               error -> Log.d("MyLog", "Error: $error")
+           }
+       )
+       queue.add()
+   }
