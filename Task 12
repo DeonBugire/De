@@ -98,3 +98,18 @@ class MainActivity : ComponentActivity() {
        )
        queue.add()
    }
+
+ @Composable
+    fun Greeting(modifier: Modifier = Modifier) {
+        val myColor: Color = Color(red = 0xF1, green = 0xAA, blue = 0x55, alpha = 0xFF)
+        Text(
+            "Привет!\n" +
+                    "О, Дион, Повелитель Теней, чтящий и читающий!\n" +
+                    "\n" +
+                    "...............",
+            fontSize = 40.sp,
+            modifier = Modifier.background(myColor).padding(30.dp)
+                .fillMaxWidth().height(200.dp)
+                .horizontalScroll(rememberScrollState())
+        )
+    }}
